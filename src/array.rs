@@ -80,6 +80,15 @@ impl<T> Array<T> {
         }
     }
 
+    /// Creates a new `Array` from its underlying components.
+    ///
+    /// The data array should be provided in the higher-dimensional equivalent
+    /// of row-major order.
+    ///
+    /// # Error
+    ///
+    /// Panics if the number of elements provided does not match the number of
+    /// elements specified by the dimensions.
     pub fn from_parts_with_err(
         data: Vec<T>,
         dimensions: Vec<Dimension>,
