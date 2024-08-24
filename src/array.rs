@@ -89,7 +89,7 @@ impl<T> Array<T> {
     ///
     /// Panics if the number of elements provided does not match the number of
     /// elements specified by the dimensions.
-    pub fn from_parts_with_err(
+    pub fn from_parts_no_panic(
         data: Vec<T>,
         dimensions: Vec<Dimension>,
     ) -> Result<Array<T>, Error> {
