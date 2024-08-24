@@ -84,7 +84,9 @@ impl<T> Array<T> {
         data: Vec<T>,
         dimensions: Vec<Dimension>,
     ) -> Result<Array<T>, Error> {
-        if data.is_empty() && dimensions.is_empty() {
+        if data.is_empty() && dimensions.is_empty()
+            || data.len() as i32 == dimensions.iter().fold(1, |acc, i| acc * i.len)
+        {
             return Err(Error::new(ErrorKind::Other, "size mismatch"));
         }
 
