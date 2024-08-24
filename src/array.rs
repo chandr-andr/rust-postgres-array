@@ -84,6 +84,12 @@ impl<T> Array<T> {
         data: Vec<T>,
         dimensions: Vec<Dimension>,
     ) -> Result<Array<T>, Error> {
+        println!(
+            "{:?}",
+            data.len() as i32 == dimensions.iter().fold(1, |acc, i| acc * i.len)
+        );
+        println!("{:?}", data.len() as i32);
+        println!("{:?}", dimensions.iter().fold(1, |acc, i| acc * i.len));
         if data.is_empty() && dimensions.is_empty()
             || data.len() as i32 == dimensions.iter().fold(1, |acc, i| acc * i.len)
         {
