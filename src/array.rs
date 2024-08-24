@@ -1,4 +1,5 @@
 use std::fmt;
+use std::io::{Error, ErrorKind};
 use std::ops::{Index, IndexMut};
 use std::slice;
 use std::vec;
@@ -77,6 +78,22 @@ impl<T> Array<T> {
             dims: dimensions,
             data,
         }
+    }
+
+    pub fn from_parts_with_err(
+        data: Vec<T>,
+        dimensions: Vec<Dimension>,
+    ) -> Result<Array<T>, Error> {
+        if (data.is_empty() && dimensions.is_empty())
+            || data.len() as i32 == dimensions.iter().fold(1, |acc, i| acc * i.len)
+        {
+            return Err(Error::new(ErrorKind::Other, "size mismatch"));
+        }
+
+        return Ok(Array {
+            dims: dimensions,
+            data,
+        });
     }
 
     /// Creates a new one-dimensional array.
